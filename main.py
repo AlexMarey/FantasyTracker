@@ -72,17 +72,17 @@ def get_players_projections(url):
     response = simple_get(url)
 
     if response is not None:
-    html = BeautifulSoup(response, 'html.parser')
-    table = html.tbody
-    projection_dict = dict()
-    table_rows = table.select('tr')
+        html = BeautifulSoup(response, 'html.parser')
+        table = html.tbody
+        projection_dict = dict()
+        table_rows = table.select('tr')
 
-    for row in table_rows:
-        name = row.td.contents[0].string
-        proj = row.select('td')[10].string
-        projection_dict[name] = proj
-        
-        return projection_dict
+        for row in table_rows:
+            name = row.td.contents[0].string
+            proj = row.select('td')[10].string
+            projection_dict[name] = proj
+            
+            return projection_dict
 
 
 if __name__ == "__main__": 
@@ -102,19 +102,30 @@ if __name__ == "__main__":
     flex = 'flex'
     k = 'k'
     positions = [qb, rb, wr, flex, k]
+
+    league_size = 8
     
     # Get all Player rankings for both scoring options
     player_rankings_std = dict()
     player_rankings_half = dict()
+    rank = 0
+    tier = 1
     for p in positions:
         # Standard Scoring
         url_rankings_std = make_url(rankings, p)
-        player_rankings_std[p] = get_players_rankings(url_rankings_std)
-        if p is qb or p is k: 
-            player_rankings_half[p] = player_rankings_std[p]
-        else:
-            url_rankings_half = make_url(rankings, p, halfPPR)
-            player_rankings_half[p] = get_players_rankings(url_rankings_half)
+        ranking_list = get_players_rankings(url_rankings_std)
+        # Think about how to format the dict so that we can write it to a csv file 
+        player_rankings_std[p] = [ranking_list[rank], rank, p.upper() + tier]
+        rank = rank + 1
+        if rank % league_size == 0:
+            tier = tier + 1
+        
+        # Half - PPR stuff
+        #if p is qb or p is k: 
+        #    player_rankings_half[p] = player_rankings_std[p]
+        #else:
+        #    url_rankings_half = make_url(rankings, p, halfPPR)
+        #    player_rankings_half[p] = get_players_rankings(url_rankings_half)
         
     # Get players projections
     player_projections_std = dict()
@@ -123,19 +134,19 @@ if __name__ == "__main__":
         # Standard Scoring
         url_projections_std = make_url(projections, p)
         player_projections_std[p] = get_players_projections(url_projections_std)
-        if p is qb or p is k: 
-            player_projections_half[p] = player_projections_std[p]
-        else:
-            url_projections_half = make_url(projections, p, halfPPR)
-            player_projections_half[p] = get_players_projections(url_projections_half)
+        # Half - PPR stuff
+        #if p is qb or p is k: 
+        #    player_projections_half[p] = player_projections_std[p]
+        #else:
+        #    url_projections_half = make_url(projections, p, halfPPR)
+        #    player_projections_half[p] = get_players_projections(url_projections_half)
         
+    # Example dict writer for csv
+    #with open('rankings.csv', 'w', newline='') as csvfile:
+    #    fieldnames = ['Name', 'Postion', 'Rank']
+    #    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
-
-    """ 
-    For each postion, grab the positional and projection data for the player.
-    Seperate that data into tiers (RB1, RB2, etc.) and email that to myself
-    """
-
-    """
-    Save the rankings, projections, and actual points for my team each week and compile them into a spreadsheet. 
-    """
+    #    writer.writeheader()
+    #    writer.writerow({'first_name': 'Baked', 'last_name': 'Beans'})
+    #    writer.writerow({'first_name': 'Lovely', 'last_name': 'Spam'})
+    #    writer.writerow({'first_name': 'Wonderful', 'last_name': 'Spam'})
