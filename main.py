@@ -23,6 +23,7 @@ def simple_get(url):
         log_error('Error during requests to {0} : {1}'.format(url, str(e)))
         return None
 
+
 def is_good_response(resp):
     """
     Returns true if the response is HTML.
@@ -33,11 +34,13 @@ def is_good_response(resp):
             and content_type is not None
             and content_type.find('html') > -1)
 
+
 def log_error(e): 
     """
     Prints error messages.
     """
     print(e)
+
 
 def make_url(purpose, position, scoring='standard'):
     base = 'https://www.fantasypros.com/nfl/'
@@ -49,7 +52,6 @@ def make_url(purpose, position, scoring='standard'):
         return base + '{0}/{1}-{2}.php'.format(purpose, scoring, position)
     # Standard & Projections or Rankings
     return base + '{0}/{1}.php'.format(purpose, position)
-
 
 
 def get_players_rankings(url): 
@@ -68,6 +70,7 @@ def get_players_rankings(url):
 
     return list(player_rankings)
 
+
 def get_players_projections(url): 
     response = simple_get(url)
 
@@ -85,29 +88,22 @@ def get_players_projections(url):
             return projection_dict
 
 
-if __name__ == "__main__": 
-    
-    # Setting up URLs to pull data from 
-    # fp -> FantasyPros
-
-    # Rankings || Projections
+if __name__ == "__main__":
+    # Variables
     rankings = 'rankings'
     projections = 'projections'
-    # Scoring
-    halfPPR = 'half-point-ppr'
-    # Positions
+    # halfPPR = 'half-point-ppr'
     qb = 'qb'
     rb = 'rb' 
     wr = 'wr'
     flex = 'flex'
     k = 'k'
     positions = [qb, rb, wr, flex, k]
-
     league_size = 8
     
     # Get all Player rankings for both scoring options
     player_rankings_std = dict()
-    player_rankings_half = dict()
+    # player_rankings_half = dict()
     rank = 0
     tier = 1
     for p in positions:
@@ -129,7 +125,7 @@ if __name__ == "__main__":
         
     # Get players projections
     player_projections_std = dict()
-    player_projections_half = dict()
+    # player_projections_half = dict()
     for p in positions:
         # Standard Scoring
         url_projections_std = make_url(projections, p)
