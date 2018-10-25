@@ -104,18 +104,14 @@ if __name__ == "__main__":
     # Get all Player rankings for both scoring options
     player_rankings_std = dict()
     # player_rankings_half = dict()
-    rank = 0
-    tier = 1
+    print("Time to get the player rankings")
     for p in positions:
         # Standard Scoring
+        print("Position: {}".format(p))
         url_rankings_std = make_url(rankings, p)
-        ranking_list = get_players_rankings(url_rankings_std)
-        # Think about how to format the dict so that we can write it to a csv file 
-        player_rankings_std[p] = [ranking_list[rank], rank, p.upper() + tier]
-        rank = rank + 1
-        if rank % league_size == 0:
-            tier = tier + 1
-        
+        print("Url: {}".format(url_rankings_std))
+        player_rankings_std[p] = get_players_rankings(url_rankings_std)
+        print("Data: {}".format(player_rankings_std[p]))
         # Half - PPR stuff
         #if p is qb or p is k: 
         #    player_rankings_half[p] = player_rankings_std[p]
@@ -124,25 +120,31 @@ if __name__ == "__main__":
         #    player_rankings_half[p] = get_players_rankings(url_rankings_half)
         
     # Get players projections
-    player_projections_std = dict()
-    # player_projections_half = dict()
-    for p in positions:
+    #player_projections_std = dict()
+    #player_projections_half = dict()
+    #for p in positions:
         # Standard Scoring
-        url_projections_std = make_url(projections, p)
-        player_projections_std[p] = get_players_projections(url_projections_std)
+        #url_projections_std = make_url(projections, p)
+        #player_projections_std[p] = get_players_projections(url_projections_std)
         # Half - PPR stuff
         #if p is qb or p is k: 
         #    player_projections_half[p] = player_projections_std[p]
         #else:
         #    url_projections_half = make_url(projections, p, halfPPR)
         #    player_projections_half[p] = get_players_projections(url_projections_half)
-        
-    # Example dict writer for csv
-    #with open('rankings.csv', 'w', newline='') as csvfile:
-    #    fieldnames = ['Name', 'Postion', 'Rank']
-    #    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
-    #    writer.writeheader()
-    #    writer.writerow({'first_name': 'Baked', 'last_name': 'Beans'})
-    #    writer.writerow({'first_name': 'Lovely', 'last_name': 'Spam'})
-    #    writer.writerow({'first_name': 'Wonderful', 'last_name': 'Spam'})
+    # Write to a CSV file
+    for position in player_rankings_std:
+        print("Outputting {} rankings to csv".format(position))
+        filename = '{}.csv'.format(position)    
+        with open(filename, 'w', newline='') as csvfile:
+            #fieldnames = ['Rank', 'Name', 'Position', 'Tier']
+            writer = csv.writer(csvfile)
+            rank = 1
+            tier = 1
+            writer.writerow(['Rank', 'Player Name', 'Tier'])
+            for player in player_rankings_std[position]:
+                writer.writerow([rank, player, position.upper() + str(tier)])
+                rank = rank + 1
+                if rank % league_size == 1: 
+                    tier = tier + 1
