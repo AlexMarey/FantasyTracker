@@ -1,6 +1,5 @@
+# Directories
 env
-
-output.txt
-row.txt
+rankings
 .vscode
-*.csv
+__pycache__/
