@@ -137,7 +137,8 @@ if __name__ == "__main__":
     for position in player_rankings_std:
         print("Outputting {} rankings to csv".format(position))
         filename = '{}.csv'.format(position)    
-        with open(filename, 'w', newline='') as csvfile:
+        directory = 'rankings\\{}'.format(filename)
+        with open(directory, 'w', newline='') as csvfile:
             #fieldnames = ['Rank', 'Name', 'Position', 'Tier']
             writer = csv.writer(csvfile)
             rank = 1
