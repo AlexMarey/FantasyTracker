@@ -2,6 +2,7 @@
 
 import os
 import csv
+from pathlib import Path
 from requests import get
 from requests.exceptions import RequestException
 from contextlib import closing
@@ -101,6 +102,9 @@ if __name__ == "__main__":
     positions = [qb, rb, wr, flex, k]
     league_size = 8
     
+    directory = 'rankings/'
+    Path(directory).mkdir(parents=True, exist_ok=True)
+
     # Get all Player rankings for both scoring options
     player_rankings_std = dict()
     # player_rankings_half = dict()
@@ -136,9 +140,8 @@ if __name__ == "__main__":
     # Write to a CSV file
     for position in player_rankings_std:
         print("Outputting {} rankings to csv".format(position))
-        filename = '{}.csv'.format(position)    
-        directory = 'rankings\\{}'.format(filename)
-        with open(directory, 'w', newline='') as csvfile:
+        filename = '{}.csv'.format(position)     
+        with open("{}{}".format(directory,filename), 'w', newline='') as csvfile:
             #fieldnames = ['Rank', 'Name', 'Position', 'Tier']
             writer = csv.writer(csvfile)
             rank = 1
