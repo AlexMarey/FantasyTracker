@@ -54,38 +54,50 @@ def make_url(purpose, position, scoring='standard'):
     return base + '{0}/{1}.php'.format(purpose, position)
 
 
-def get_players_rankings(url): 
+def get_table_data(url): 
     response = simple_get(url)
 
     if response is not None:
+        results = list()
         html = BeautifulSoup(response, 'html.parser')
         table = html.tbody
-        player_html = set()
-        player_rankings = set() 
-
-        player_html = table.select('span.short-name')
-
-        for p in player_html:
-            player_rankings.add(p.string)
-
-    return list(player_rankings)
-
-
-def get_players_projections(url): 
-    response = simple_get(url)
-
-    if response is not None:
-        html = BeautifulSoup(response, 'html.parser')
-        table = html.tbody
-        projection_dict = dict()
         table_rows = table.select('tr')
 
         for row in table_rows:
-            name = row.td.contents[0].string
-            proj = row.select('td')[10].string
-            projection_dict[name] = proj
+            col = row.find_all('td')
+            col = [ele.text.strip() for ele in col]
+            results.append([ele for ele in col if ele])
             
-            return projection_dict
+        return results
+    
+
+def get_players_rankings(url, league_size, position): 
+    # Get Data
+    data = get_table_data(url)
+    # Parse Rankings
+    rankings = list()
+    tier = 1
+    for row in data: 
+        name_split = row[1].split('. ')
+        # Check for names like C.J. Beathard
+        if len(name_split) > 2: 
+            player_name = ''.join(name_split[:-1])
+        else: 
+            player_name = row[1].split('. ',1)[0][:-1]
+        rank = int(row[0])
+        tier_rank = '{}{}'.format(position.upper(), str(tier))
+        if (rank + 1) % league_size == 0: 
+            tier = tier + 1
+        rankings.append([player_name, tier_rank])
+    return rankings
+
+
+def get_players_projections(url): 
+    # Get Data
+    data = get_table_data(url)
+    # Parse Projections
+    # To do implement projections!
+    return data
 
 
 if __name__ == "__main__":
@@ -110,7 +122,7 @@ if __name__ == "__main__":
         print("Position: {}".format(p))
         url_rankings_std = make_url(rankings, p)
         print("Url: {}".format(url_rankings_std))
-        player_rankings_std[p] = get_players_rankings(url_rankings_std)
+        player_rankings_std[p] = get_players_rankings(url_rankings_std, league_size, p)
         print("Data: {}".format(player_rankings_std[p]))
         # Half - PPR stuff
         #if p is qb or p is k: 
@@ -145,7 +157,7 @@ if __name__ == "__main__":
             tier = 1
             writer.writerow(['Rank', 'Player Name', 'Tier'])
             for player in player_rankings_std[position]:
-                writer.writerow([rank, player, position.upper() + str(tier)])
+                writer.writerow(player)
                 rank = rank + 1
                 if rank % league_size == 1: 
                     tier = tier + 1
