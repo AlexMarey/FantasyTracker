@@ -119,12 +119,16 @@ if __name__ == "__main__":
     flex = 'flex'
     k = 'k'
     # Removed flex for the time being
-    positions = [qb, rb, wr, k]
+    positions = [qb, rb, wr, flex, k]
     league_size = 8
     
+    # Create Directories
+    week_number = 9
     directory = 'rankings/'
+    week = 'Week_{}'.format(week_number)
+    directory_week = '{}{}/'.format(directory, week)
     Path(directory).mkdir(parents=True, exist_ok=True)
-
+    Path(directory_week).mkdir(parents=True, exist_ok=True)
     # Get all Player rankings for both scoring options
     player_rankings_std = dict()
     # player_rankings_half = dict()
@@ -141,7 +145,7 @@ if __name__ == "__main__":
     for position in player_rankings_std:
         print("Outputting {} rankings to csv".format(position))
         filename = '{}.csv'.format(position)     
-        with open("{}{}".format(directory,filename), 'w', newline='') as csvfile:
+        with open("{}{}".format(directory_week,filename), 'w', newline='') as csvfile:
             #fieldnames = ['Rank', 'Name', 'Position', 'Tier']
             writer = csv.writer(csvfile)
             rank = 1
@@ -149,4 +153,4 @@ if __name__ == "__main__":
             writer.writerow(['Rank', 'Player Name', 'Tier'])
             for player in player_rankings_std[position]:
                 writer.writerow(player)
-                
+            
