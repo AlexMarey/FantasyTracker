@@ -76,7 +76,7 @@ def parse_names(name_list):
     split_name = name_list.split('. ')
     # Check for names like C.J. Beathard
     if len(split_name) > 2: 
-        player_name = ''.join(split_name[:-1])[:-1]
+        player_name = '. '.join(split_name[:-1])[:-1]
     else: 
         player_name = split_name[0][:-1]
     return player_name
