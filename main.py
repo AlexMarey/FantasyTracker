@@ -70,7 +70,16 @@ def get_table_data(url):
             results.append([ele for ele in col if ele])
             
         return results
-    
+
+def parse_names(name_list):
+    print(name_list)
+    split_name = name_list.split('. ')
+    # Check for names like C.J. Beathard
+    if len(split_name) > 2: 
+        player_name = ''.join(split_name[:-1])[:-1]
+    else: 
+        player_name = split_name[0][:-1]
+    return player_name
 
 def get_players_rankings(url, league_size, position): 
     # Get Data
@@ -79,17 +88,15 @@ def get_players_rankings(url, league_size, position):
     rankings = list()
     tier = 1
     for row in data: 
-        name_split = row[1].split('. ')
-        # Check for names like C.J. Beathard
-        if len(name_split) > 2: 
-            player_name = ''.join(name_split[:-1])
-        else: 
-            player_name = row[1].split('. ',1)[0][:-1]
+        #print(row)
+        if tier == 6: break 
+        player_name = parse_names(row[1])
         rank = int(row[0])
         tier_rank = '{}{}'.format(position.upper(), str(tier))
         if (rank + 1) % league_size == 0: 
             tier = tier + 1
-        rankings.append([player_name, tier_rank])
+        #print([rank, player_name, tier_rank])
+        rankings.append([rank, player_name, tier_rank])
     return rankings
 
 
@@ -111,7 +118,8 @@ if __name__ == "__main__":
     wr = 'wr'
     flex = 'flex'
     k = 'k'
-    positions = [qb, rb, wr, flex, k]
+    # Removed flex for the time being
+    positions = [qb, rb, wr, k]
     league_size = 8
     
     directory = 'rankings/'
@@ -128,26 +136,6 @@ if __name__ == "__main__":
         print("Url: {}".format(url_rankings_std))
         player_rankings_std[p] = get_players_rankings(url_rankings_std, league_size, p)
         print("Data: {}".format(player_rankings_std[p]))
-        # Half - PPR stuff
-        #if p is qb or p is k: 
-        #    player_rankings_half[p] = player_rankings_std[p]
-        #else:
-        #    url_rankings_half = make_url(rankings, p, halfPPR)
-        #    player_rankings_half[p] = get_players_rankings(url_rankings_half)
-        
-    # Get players projections
-    #player_projections_std = dict()
-    #player_projections_half = dict()
-    #for p in positions:
-        # Standard Scoring
-        #url_projections_std = make_url(projections, p)
-        #player_projections_std[p] = get_players_projections(url_projections_std)
-        # Half - PPR stuff
-        #if p is qb or p is k: 
-        #    player_projections_half[p] = player_projections_std[p]
-        #else:
-        #    url_projections_half = make_url(projections, p, halfPPR)
-        #    player_projections_half[p] = get_players_projections(url_projections_half)
 
     # Write to a CSV file
     for position in player_rankings_std:
@@ -161,6 +149,4 @@ if __name__ == "__main__":
             writer.writerow(['Rank', 'Player Name', 'Tier'])
             for player in player_rankings_std[position]:
                 writer.writerow(player)
-                rank = rank + 1
-                if rank % league_size == 1: 
-                    tier = tier + 1
+                
