@@ -89,14 +89,14 @@ def get_players_rankings(url, league_size, position):
     tier = 1
     for row in data: 
         #print(row)
-        if tier == 6: break 
-        player_name = parse_names(row[1])
-        rank = int(row[0])
-        tier_rank = '{}{}'.format(position.upper(), str(tier))
-        if (rank + 1) % league_size == 0: 
-            tier = tier + 1
-        #print([rank, player_name, tier_rank])
-        rankings.append([rank, player_name, tier_rank])
+        if(len(row) == 7):
+            player_name = parse_names(row[1])
+            rank = int(row[0])
+            tier_rank = '{}{}'.format(position.upper(), str(tier))
+            if (rank) % league_size == 0: 
+                tier = tier + 1
+            #print([rank, player_name, tier_rank])
+            rankings.append([rank, player_name, tier_rank])
     return rankings
 
 
@@ -123,13 +123,13 @@ if __name__ == "__main__":
     league_size = 8
     
     # Create Directories
-    week_number = 9
+    week_number = 11
     directory = 'rankings/'
     week = 'Week_{}'.format(week_number)
     directory_week = '{}{}/'.format(directory, week)
     Path(directory).mkdir(parents=True, exist_ok=True)
     Path(directory_week).mkdir(parents=True, exist_ok=True)
-    # Get all Player rankings for both scoring options
+    # Get all Player rankings 
     player_rankings_std = dict()
     # player_rankings_half = dict()
     print("Time to get the player rankings")
