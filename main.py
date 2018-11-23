@@ -67,12 +67,10 @@ def get_table_data(url):
         for row in table_rows:
             col = row.find_all('td')
             col = [ele.text.strip() for ele in col]
-            results.append([ele for ele in col if ele])
-            
+            results.append([ele for ele in col if ele])        
         return results
 
 def parse_names(name_list):
-    print(name_list)
     split_name = name_list.split('. ')
     # Check for names like C.J. Beathard
     if len(split_name) > 2: 
@@ -123,7 +121,7 @@ if __name__ == "__main__":
     league_size = 8
     
     # Create Directories
-    week_number = 11
+    week_number = 12
     directory = 'rankings/'
     week = 'Week_{}'.format(week_number)
     directory_week = '{}{}/'.format(directory, week)
