@@ -159,4 +159,9 @@ if __name__ == "__main__":
             writer.writerow(['Rank', 'Player Name', 'Tier'])
             for player in player_rankings_std[position]:
                 writer.writerow(player)
-            
+    
+    # Find teams to look up rankings for
+    if not os.path.exists("./teams"):
+        pass
+    else:
+        pass
