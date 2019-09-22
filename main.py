@@ -105,6 +105,16 @@ def get_players_projections(url):
     # To do implement projections!
     return data
 
+def set_directory_week(directory, week_number):
+    week = 'Week_{}'.format(week_number)
+    directory_week = '{}{}/'.format(directory, week)
+    return directory_week
+
+def create_weekly_ranking_directories(directory, directory_week):
+    Path(directory).mkdir(parents=True, exist_ok=True)
+    Path(directory_week).mkdir(parents=True, exist_ok=True)
+    return
+
 
 if __name__ == "__main__":
     # Variables
@@ -121,15 +131,14 @@ if __name__ == "__main__":
     league_size = 8
     
     # Create Directories
-    week_number = 12
+    week_number = 3
     directory = 'rankings/'
-    week = 'Week_{}'.format(week_number)
-    directory_week = '{}{}/'.format(directory, week)
-    Path(directory).mkdir(parents=True, exist_ok=True)
-    Path(directory_week).mkdir(parents=True, exist_ok=True)
+    directory_week = set_directory_week(directory, week_number)
+    create_weekly_ranking_directories(directory, directory_week)
+    
     # Get all Player rankings 
     player_rankings_std = dict()
-    # player_rankings_half = dict()
+
     print("Time to get the player rankings")
     for p in positions:
         # Standard Scoring
@@ -144,7 +153,6 @@ if __name__ == "__main__":
         print("Outputting {} rankings to csv".format(position))
         filename = '{}.csv'.format(position)     
         with open("{}{}".format(directory_week,filename), 'w', newline='') as csvfile:
-            #fieldnames = ['Rank', 'Name', 'Position', 'Tier']
             writer = csv.writer(csvfile)
             rank = 1
             tier = 1
