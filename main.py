@@ -97,7 +97,6 @@ def get_players_rankings(url, league_size, position):
             rankings.append([rank, player_name, tier_rank])
     return rankings
 
-
 def get_players_projections(url): 
     # Get Data
     data = get_table_data(url)
@@ -114,7 +113,6 @@ def create_weekly_ranking_directories(directory, directory_week):
     Path(directory).mkdir(parents=True, exist_ok=True)
     Path(directory_week).mkdir(parents=True, exist_ok=True)
     return
-
 
 if __name__ == "__main__":
     # Variables
