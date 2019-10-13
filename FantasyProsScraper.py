@@ -2,9 +2,12 @@ from pathlib import Path
 from Scraper import Scraper
 from bs4 import BeautifulSoup
 
-class FantasyProsScraper():
+class FantasyProsScraper(Scraper):
 
-    def make_url(purpose, position, scoring='standard'):
+    def __init__(self):
+        self.url = ''
+
+    def make_url(self, purpose, position, scoring='standard'):
         base = 'https://www.fantasypros.com/nfl/'
         if scoring == 'half-point-ppr':
             if purpose == 'projections': 
@@ -16,8 +19,8 @@ class FantasyProsScraper():
         return base + '{0}/{1}.php'.format(purpose, position)
 
 
-    def get_table_data(url): 
-        response = Scraper.simple_get(url)
+    def get_table_data(self, url): 
+        response = self.simple_get(url)
 
         if response is not None:
             results = list()
@@ -31,7 +34,7 @@ class FantasyProsScraper():
                 results.append([ele for ele in col if ele])        
             return results
 
-    def parse_names(name_list):
+    def parse_names(self, name_list):
         split_name = name_list.split('. ')
         # Check for names like C.J. Beathard
         if len(split_name) > 2: 
@@ -40,16 +43,16 @@ class FantasyProsScraper():
             player_name = split_name[0][:-1]
         return player_name
 
-    def get_players_rankings(url, league_size, position): 
+    def get_players_rankings(self, url, league_size, position): 
         # Get Data
-        data = get_table_data(url)
+        data = self.get_table_data(url)
         # Parse Rankings
         rankings = list()
         tier = 1
         for row in data: 
             #print(row)
             if(len(row) == 7):
-                player_name = parse_names(row[1])
+                player_name = self.parse_names(row[1])
                 rank = int(row[0])
                 tier_rank = '{}{}'.format(position.upper(), str(tier))
                 if (rank) % league_size == 0: 
@@ -58,19 +61,19 @@ class FantasyProsScraper():
                 rankings.append([rank, player_name, tier_rank])
         return rankings
 
-    def get_players_projections(url): 
+    def get_players_projections(self, url): 
         # Get Data
-        data = get_table_data(url)
+        data = self.get_table_data(url)
         # Parse Projections
         # To do implement projections!
         return data
 
-    def set_directory_week(directory, week_number):
+    def set_directory_week(self, directory, week_number):
         week = 'Week_{}'.format(week_number)
         directory_week = '{}{}/'.format(directory, week)
         return directory_week
 
-    def create_weekly_ranking_directories(directory, directory_week):
+    def create_weekly_ranking_directories(self, directory, directory_week):
         Path(directory).mkdir(parents=True, exist_ok=True)
         Path(directory_week).mkdir(parents=True, exist_ok=True)
         return

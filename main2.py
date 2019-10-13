@@ -1,8 +1,10 @@
 import os
 import csv
-from FantasyProsScraper import FantasyProsScraper as FpScraper
+from FantasyProsScraper import FantasyProsScraper
 
 if __name__ == "__main__":
+    FpScraper = FantasyProsScraper()
+
     # Variables
     rankings = 'rankings'
     projections = 'projections'
@@ -29,10 +31,10 @@ if __name__ == "__main__":
     for p in positions:
         # Standard Scoring
         print("Position: {}".format(p))
-        FpScraper.url_rankings_std = FpScraper.make_url(rankings, p)
-        print("Url: {}".format(FpScraper.url_rankings_std))
-        FpScraper.player_rankings_std[p] = FpScraper.get_players_rankings(FpScraper.url_rankings_std, league_size, p)
-        print("Data: {}".format(FpScraper.player_rankings_std[p]))
+        url_rankings_std = FpScraper.make_url(rankings, p)
+        print("Url: {}".format(url_rankings_std))
+        player_rankings_std[p] = FpScraper.get_players_rankings(url_rankings_std, league_size, p)
+        print("Data: {}".format(player_rankings_std[p]))
 
     # Write to a CSV file
     for position in player_rankings_std:

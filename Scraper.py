@@ -3,7 +3,10 @@ from requests.exceptions import RequestException
 from contextlib import closing
 
 class Scraper():
-    def simple_get(url):
+    def __init__(self):
+        return
+
+    def simple_get(self, url):
         """
         Attempts to get the content of the url by making an HTTP GET request. 
         If the content-type of response is some kind of HTML/XML, 
@@ -11,7 +14,7 @@ class Scraper():
         """
         try:
             with closing(get(url, stream=True)) as resp: 
-                if is_good_response(resp):
+                if self.is_good_response(resp):
                     return resp.content
                 else: 
                     return None
@@ -20,7 +23,7 @@ class Scraper():
             return None
 
 
-    def is_good_response(resp):
+    def is_good_response(self, resp):
         """
         Returns true if the response is HTML.
         Returns false otherwise
@@ -31,7 +34,7 @@ class Scraper():
                 and content_type.find('html') > -1)
 
 
-    def log_error(e): 
+    def log_error(self, e): 
         """
         Prints error messages.
         """
