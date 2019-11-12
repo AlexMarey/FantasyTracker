@@ -4,6 +4,7 @@ from FantasyProsScraper import FantasyProsScraper
 
 if __name__ == "__main__":
     FpScraper = FantasyProsScraper()
+    Directory = Directory()
 
     # Variables
     rankings = 'rankings'
@@ -19,10 +20,8 @@ if __name__ == "__main__":
     league_size = 8
     
     # Create Directories
-    week_number = 5
-    directory = 'rankings/'
-    directory_week = FpScraper.set_directory_week(directory, week_number)
-    FpScraper.create_weekly_ranking_directories(directory, directory_week)
+    Directory.setWeek(19)
+    Directory.createWeeklyRankingDirectories()
     
     # Get all Player rankings 
     player_rankings_std = dict()

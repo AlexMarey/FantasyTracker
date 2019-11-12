@@ -1,11 +1,11 @@
-from pathlib import Path
 from Scraper import Scraper
 from bs4 import BeautifulSoup
 
 class FantasyProsScraper(Scraper):
 
-    def __init__(self):
-        self.url = ''
+    def getData(self): 
+        data = ''
+        return data
 
     def make_url(self, purpose, position, scoring='standard'):
         base = 'https://www.fantasypros.com/nfl/'
@@ -67,13 +67,3 @@ class FantasyProsScraper(Scraper):
         # Parse Projections
         # To do implement projections!
         return data
-
-    def set_directory_week(self, directory, week_number):
-        week = 'Week_{}'.format(week_number)
-        directory_week = '{}{}/'.format(directory, week)
-        return directory_week
-
-    def create_weekly_ranking_directories(self, directory, directory_week):
-        Path(directory).mkdir(parents=True, exist_ok=True)
-        Path(directory_week).mkdir(parents=True, exist_ok=True)
-        return
