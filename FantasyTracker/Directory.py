@@ -10,13 +10,12 @@ class Directory():
     def setWeek(self, week):
         if isinstance(week, int):
             if week < 0 or week > 17:
-                self.week = -1
+                raise ValueError("Week must be between 0 and 18")
             else: 
                 self.week = 9
         else:
             raise ValueError("setWeek only excepts integers.")
 
-    
     def formatWeek(self):
         return 'Week_{}'.format(self.week)
 
