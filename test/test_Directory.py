@@ -11,6 +11,7 @@ class TestDirectory(unittest.TestCase):
         self.assertEqual(self.directory.path, 'Rankings/')
     
     def test_SetWeek_BetweenZeroAndSeventeen_IsBetweenZeroAndSeventeen(self):
+        # Arrange
         expectedWeek = 9
         # Act
         self.directory.setWeek(expectedWeek)
@@ -28,6 +29,22 @@ class TestDirectory(unittest.TestCase):
     def test_SetWeek_WeekIsNotAnInt_ThrownValueError(self):
         with self.assertRaises(ValueError) as result:
             self.directory.setWeek("I'm not a number! I'm a string!")
+
+    def test_GetFormattedWeek_ReturnsExpectedWeek(self):
+        expectedWeek = 'Week_8'
+        self.directory.setWeek(8)
+        
+        result = self.directory.getFormattedWeek()
+        
+        self.assertEqual(expectedWeek, result)
+
+    def test_GetFormattedPath_ReturnsExpectedWeek(self):
+        expectedPath = 'Rankings/Week_8'
+        self.directory.setWeek(8)
+        
+        result = self.directory.getFormattedPath()
+        
+        self.assertEqual(expectedPath, result)
 
 if __name__ == '__main__':
     unittest.main()

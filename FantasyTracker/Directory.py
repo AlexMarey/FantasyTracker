@@ -16,17 +16,17 @@ class Directory():
         else:
             raise ValueError("setWeek only excepts integers.")
 
-    def getFormatedWeek(self):
+    def getFormattedWeek(self):
         return 'Week_{}'.format(self.week)
 
-    def getFormatedPath(self):
-        return '{}{}/'.format(self.path, self.getFormatedWeek())
+    def getFormattedPath(self):
+        return '{}{}'.format(self.path, self.getFormattedWeek())
 
     def createRankingsDirectory(self):
         Path(self.path).mkdir(parents=True, exist_ok=True)
         
     def createWeeklyDirectory(self):
-        Path(self.getFormatedPath()).mkdir(parents=True, exist_ok=True)
+        Path(self.getFormattedPath()).mkdir(parents=True, exist_ok=True)
 
     # Creates weekly ranking directory if there needs to be one
     def createWeeklyRankingDirectories(self):
