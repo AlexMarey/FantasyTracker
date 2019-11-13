@@ -11,10 +11,11 @@ class TestDirectory(unittest.TestCase):
         self.assertEqual(self.directory.path, 'Rankings/')
     
     def test_SetWeek_BetweenZeroAndSeventeen_IsBetweenZeroAndSeventeen(self):
+        expectedWeek = 9
         # Act
-        self.directory.setWeek(9)
+        self.directory.setWeek(expectedWeek)
         # Assert
-        self.assertEqual(self.directory.week, 9)
+        self.assertEqual(self.directory.week, expectedWeek)
     
     def test_SetWeek_LessThanZero_ThrownValueError(self):
         with self.assertRaises(ValueError) as result:

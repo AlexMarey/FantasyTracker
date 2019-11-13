@@ -9,10 +9,10 @@ class Directory():
 
     def setWeek(self, week):
         if isinstance(week, int):
-            if week < 0 or week > 17:
-                raise ValueError("Week must be between 0 and 18")
+            if week > 0 and week < 18:
+                self.week = week
             else: 
-                self.week = 9
+                raise ValueError("Week must be between 0 and 18")
         else:
             raise ValueError("setWeek only excepts integers.")
 
