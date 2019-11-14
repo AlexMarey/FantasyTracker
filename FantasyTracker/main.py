@@ -1,6 +1,7 @@
 import os
 import csv
 from FantasyProsScraper import FantasyProsScraper
+from Directory import Directory
 
 if __name__ == "__main__":
     FpScraper = FantasyProsScraper()
@@ -20,7 +21,7 @@ if __name__ == "__main__":
     league_size = 8
     
     # Create Directories
-    Directory.setWeek(19)
+    Directory.setWeek(11)
     Directory.createWeeklyRankingDirectories()
     
     # Get all Player rankings 
@@ -36,19 +37,19 @@ if __name__ == "__main__":
         print("Data: {}".format(player_rankings_std[p]))
 
     # Write to a CSV file
-    for position in player_rankings_std:
-        print("Outputting {} rankings to csv".format(position))
-        filename = '{}.csv'.format(position)     
-        with open("{}{}".format(directory_week,filename), 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile)
-            rank = 1
-            tier = 1
-            writer.writerow(['Rank', 'Player Name', 'Tier'])
-            for player in player_rankings_std[position]:
-                writer.writerow(player)
+    # for position in player_rankings_std:
+    #     print("Outputting {} rankings to csv".format(position))
+    #     filename = '{}.csv'.format(position)     
+    #     with open("{}{}".format(directory_week,filename), 'w', newline='') as csvfile:
+    #         writer = csv.writer(csvfile)
+    #         rank = 1
+    #         tier = 1
+    #         writer.writerow(['Rank', 'Player Name', 'Tier'])
+    #         for player in player_rankings_std[position]:
+    #             writer.writerow(player)
     
     # Find teams to look up rankings for
-    if not os.path.exists("./teams"):
-        pass
-    else:
-        pass
+    # if not os.path.exists("./teams"):
+    #     pass
+    # else:
+    #     pass

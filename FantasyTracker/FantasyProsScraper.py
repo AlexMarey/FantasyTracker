@@ -4,7 +4,8 @@ from bs4 import BeautifulSoup
 class FantasyProsScraper(Scraper):
 
     def getData(self): 
-        data = ''
+        # Get scrape data
+        # Parse into json
         return data
 
     def make_url(self, purpose, position, scoring='standard'):
@@ -51,7 +52,8 @@ class FantasyProsScraper(Scraper):
         tier = 1
         for row in data: 
             #print(row)
-            if(len(row) == 7):
+            if(len(row) > 1):
+                #print("Calling parse_names")
                 player_name = self.parse_names(row[1])
                 rank = int(row[0])
                 tier_rank = '{}{}'.format(position.upper(), str(tier))
