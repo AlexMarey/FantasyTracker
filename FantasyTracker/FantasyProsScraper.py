@@ -3,11 +3,6 @@ from bs4 import BeautifulSoup
 
 class FantasyProsScraper(Scraper):
 
-    def getData(self): 
-        # Get scrape data
-        # Parse into json
-        return data
-
     def make_url(self, purpose, position, scoring='standard'):
         base = 'https://www.fantasypros.com/nfl/'
         if scoring == 'half-point-ppr':
@@ -18,7 +13,6 @@ class FantasyProsScraper(Scraper):
             return base + '{0}/{1}-{2}.php'.format(purpose, scoring, position)
         # Standard & Projections or Rankings
         return base + '{0}/{1}.php'.format(purpose, position)
-
 
     def get_table_data(self, url): 
         response = self.simple_get(url)
@@ -62,10 +56,3 @@ class FantasyProsScraper(Scraper):
                 #print([rank, player_name, tier_rank])
                 rankings.append([rank, player_name, tier_rank])
         return rankings
-
-    def get_players_projections(self, url): 
-        # Get Data
-        data = self.get_table_data(url)
-        # Parse Projections
-        # To do implement projections!
-        return data
