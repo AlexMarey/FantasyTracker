@@ -19,25 +19,26 @@ if __name__ == "__main__":
     # Removed flex for the time being
     positions = [qb, rb, wr, flex, k]
     league_size = 8
+    week = 13
     
     # Create Directories
-    Directory.setWeek(11)
+    Directory.setWeek(week)
     Directory.createWeeklyRankingDirectories()
     
     # Get all Player rankings 
-    player_rankings_std = dict()
+    playerRankings = dict()
 
     print("Time to get the player rankings")
     for p in positions:
         # Standard Scoring
         print("Position: {}".format(p))
-        url_rankings_std = FpScraper.make_url(rankings, p)
+        url_rankings_std = FpScraper.makeUrl(rankings, p)
         print("Url: {}".format(url_rankings_std))
-        player_rankings_std[p] = FpScraper.get_players_rankings(url_rankings_std, league_size, p)
-        print("Data: {}".format(player_rankings_std[p]))
+        playerRankings[p] = FpScraper.getPlayerRankings(url_rankings_std, league_size, p)
+        print("Data: {}".format(playerRankings[p]))
 
     # Write to a CSV file
-    # for position in player_rankings_std:
+    # for position in playerRankings:
     #     print("Outputting {} rankings to csv".format(position))
     #     filename = '{}.csv'.format(position)     
     #     with open("{}{}".format(directory_week,filename), 'w', newline='') as csvfile:
@@ -45,11 +46,5 @@ if __name__ == "__main__":
     #         rank = 1
     #         tier = 1
     #         writer.writerow(['Rank', 'Player Name', 'Tier'])
-    #         for player in player_rankings_std[position]:
+    #         for player in playerRankings[position]:
     #             writer.writerow(player)
-    
-    # Find teams to look up rankings for
-    # if not os.path.exists("./teams"):
-    #     pass
-    # else:
-    #     pass

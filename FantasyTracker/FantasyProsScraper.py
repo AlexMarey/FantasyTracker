@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 class FantasyProsScraper(Scraper):
 
-    def make_url(self, purpose, position, scoring='standard'):
+    def makeUrl(self, purpose, position, scoring='standard'):
         base = 'https://www.fantasypros.com/nfl/'
         if scoring == 'half-point-ppr':
             if purpose == 'projections': 
@@ -14,7 +14,7 @@ class FantasyProsScraper(Scraper):
         # Standard & Projections or Rankings
         return base + '{0}/{1}.php'.format(purpose, position)
 
-    def get_table_data(self, url): 
+    def getPlayerData(self, url): 
         response = self.simple_get(url)
 
         if response is not None:
@@ -24,12 +24,12 @@ class FantasyProsScraper(Scraper):
             table_rows = table.select('tr')
 
             for row in table_rows:
-                col = row.find_all('td')
-                col = [ele.text.strip() for ele in col]
-                results.append([ele for ele in col if ele])        
+                cell = row.find_all('td')
+                cell = [element.text.strip() for element in cell]
+                results.append([element for element in cell if element])        
             return results
 
-    def parse_names(self, name_list):
+    def parsePlayerNames(self, name_list):
         split_name = name_list.split('. ')
         # Check for names like C.J. Beathard
         if len(split_name) > 2: 
@@ -38,17 +38,17 @@ class FantasyProsScraper(Scraper):
             player_name = split_name[0][:-1]
         return player_name
 
-    def get_players_rankings(self, url, league_size, position): 
+    def getPlayerRankings(self, url, league_size, position): 
         # Get Data
-        data = self.get_table_data(url)
+        data = self.getPlayerData(url)
         # Parse Rankings
         rankings = list()
         tier = 1
         for row in data: 
             #print(row)
             if(len(row) > 1):
-                #print("Calling parse_names")
-                player_name = self.parse_names(row[1])
+                #print("Calling parsePlayerNames")
+                player_name = self.parsePlayerNames(row[1])
                 rank = int(row[0])
                 tier_rank = '{}{}'.format(position.upper(), str(tier))
                 if (rank) % league_size == 0: 
