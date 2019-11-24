@@ -1,0 +1,72 @@
+{
+    "league": "The Palmetto League",
+    "currentWeek": 15,
+    "teamSize": 16,
+    "players": 
+        [
+            {
+                "position": "qb",
+                "player": "Deshaun Watson"
+            },
+            {
+                "position": "qb",
+                "player": "Russell Wilson"
+            },
+            {
+                "position": "wr",
+                "player": "DeAndre Hopkins"
+            },
+            {
+                "position": "wr",
+                "player": "Dj Chark Jr."
+            },
+            {
+                "position": "wr",
+                "player": "Robert Woods"
+            },
+            {
+                "position": "rb",
+                "player": "David Montgomery"
+            },
+            {
+                "position": "rb",
+                "player": "Joe Mixon"
+            },
+            {
+                "position": "k",
+                "player": "Matt Gay"
+            },
+            {
+                "position": "def",
+                "player": "Detroit"
+            },
+            {
+                "position": "te",
+                "player": "Ryan Griffin"
+            },
+            {
+                "position": "te",
+                "player": "Travis Kelce"
+            },
+            {
+                "position": "wr",
+                "player": "Keenan Allen"
+            },
+            {
+                "position": "rb",
+                "player": "Austin Ekeler"
+            },
+            {
+                "position": "rb",
+                "player": "Devin Singletary"
+            },
+            {
+                "position": "wr",
+                "player": "Marquise Brown"
+            },
+            {
+                "position": "rb",
+                "player": "Sony Michel"
+            }
+        ]
+}

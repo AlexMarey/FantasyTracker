@@ -38,13 +38,13 @@ if __name__ == "__main__":
         print("Data: {}".format(playerRankings[p]))
 
     # Write to a CSV file
-    # for position in playerRankings:
-    #     print("Outputting {} rankings to csv".format(position))
-    #     filename = '{}.csv'.format(position)     
-    #     with open("{}{}".format(directory_week,filename), 'w', newline='') as csvfile:
-    #         writer = csv.writer(csvfile)
-    #         rank = 1
-    #         tier = 1
-    #         writer.writerow(['Rank', 'Player Name', 'Tier'])
-    #         for player in playerRankings[position]:
-    #             writer.writerow(player)
+    for position in playerRankings:
+        print("Outputting {} rankings to csv".format(position))
+        filename = '{}.csv'.format(position)     
+        with open("{}/{}".format(Directory.getFormattedWeek(),filename), 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            rank = 1
+            tier = 1
+            writer.writerow(['Rank', 'Player Name', 'Tier'])
+            for player in playerRankings[position]:
+                writer.writerow(player)
