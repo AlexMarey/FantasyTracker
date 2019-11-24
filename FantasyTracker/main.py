@@ -4,9 +4,6 @@ from FantasyProsScraper import FantasyProsScraper
 from Directory import Directory
 
 if __name__ == "__main__":
-    FpScraper = FantasyProsScraper()
-    Directory = Directory()
-
     # Variables
     rankings = 'rankings'
     projections = 'projections'
@@ -21,13 +18,17 @@ if __name__ == "__main__":
     positions = [qb, rb, wr, te, flex, k]
     league_size = 8
     week = 12
-    
+
+    # Class Initialization
+    FpScraper = FantasyProsScraper(league_size, positions, rankings)
+    Directory = Directory()
+
     # Create Directories
     Directory.setWeek(week)
     Directory.createWeeklyRankingDirectories()
     
     # Get all Player rankings 
-    playerRankings = FpScraper.getData(league_size, positions, rankings)
+    playerRankings = FpScraper.getData()
 
     # Write to a CSV file
     # for position in playerRankings:
