@@ -15,36 +15,28 @@ if __name__ == "__main__":
     rb = 'rb' 
     wr = 'wr'
     flex = 'flex'
+    te = 'te'
     k = 'k'
     # Removed flex for the time being
-    positions = [qb, rb, wr, flex, k]
+    positions = [qb, rb, wr, te, flex, k]
     league_size = 8
-    week = 13
+    week = 12
     
     # Create Directories
     Directory.setWeek(week)
     Directory.createWeeklyRankingDirectories()
     
     # Get all Player rankings 
-    playerRankings = dict()
-
-    print("Time to get the player rankings")
-    for p in positions:
-        # Standard Scoring
-        print("Position: {}".format(p))
-        url_rankings_std = FpScraper.makeUrl(rankings, p)
-        print("Url: {}".format(url_rankings_std))
-        playerRankings[p] = FpScraper.getPlayerRankings(url_rankings_std, league_size, p)
-        print("Data: {}".format(playerRankings[p]))
+    playerRankings = FpScraper.getData(league_size, positions, rankings)
 
     # Write to a CSV file
-    for position in playerRankings:
-        print("Outputting {} rankings to csv".format(position))
-        filename = '{}.csv'.format(position)     
-        with open("{}/{}".format(Directory.getFormattedWeek(),filename), 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile)
-            rank = 1
-            tier = 1
-            writer.writerow(['Rank', 'Player Name', 'Tier'])
-            for player in playerRankings[position]:
-                writer.writerow(player)
+    # for position in playerRankings:
+    #     print("Outputting {} rankings to csv".format(position))
+    #     filename = '{}.csv'.format(position)     
+    #     with open("{}/{}".format(Directory.getFormattedWeek(),filename), 'w', newline='') as csvfile:
+    #         writer = csv.writer(csvfile)
+    #         rank = 1
+    #         tier = 1
+    #         writer.writerow(['Rank', 'Player Name', 'Tier'])
+    #         for player in playerRankings[position]:
+    #             writer.writerow(player)

@@ -3,7 +3,19 @@ from bs4 import BeautifulSoup
 
 class FantasyProsScraper(Scraper):
 
-    def makeUrl(self, purpose, position, scoring='standard'):
+    
+    def getData(self, leagueSize, positions, purpose):
+        playerRankings = dict()
+        
+        for item in positions:
+             print("Position: {}".format(item))
+             url = self.makeUrl(purpose, item)
+             print("Url: {}".format(url))
+             playerRankings[item] = self.getPlayerRankings(url, leagueSize, item)
+             print("Data: {}".format(playerRankings[item]))
+        return playerRankings
+    
+    def makeUrl(self, purpose, position, scoring='half-point-ppr'):
         base = 'https://www.fantasypros.com/nfl/'
         if scoring == 'half-point-ppr':
             if purpose == 'projections': 
@@ -16,7 +28,7 @@ class FantasyProsScraper(Scraper):
 
     def getPlayerData(self, url): 
         response = self.simple_get(url)
-
+        
         if response is not None:
             results = list()
             html = BeautifulSoup(response, 'html.parser')
