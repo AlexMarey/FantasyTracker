@@ -1,22 +1,16 @@
 import os
 import json
+import sys
 from FantasyProsScraper import FantasyProsScraper
 from Directory import Directory
 
 if __name__ == "__main__":
-    # Variables
-    rankings = 'rankings'
-    
-    # Import Team/League Settings
-    with open('teams/PalmettoLeague.json') as jsonFile:
-        leagueSettings = json.load(jsonFile)
-
-    week = leagueSettings["currentWeek"]
-    leagueSize = leagueSettings["leagueSize"]
-    positions = leagueSettings["positions"]
+    ### LOOK INTO ARGPARSE
+    week = int(sys.argv[1])
+    ###
     
     # Class Initialization
-    FpScraper = FantasyProsScraper(positions, rankings)
+    FpScraper = FantasyProsScraper()
     Directory = Directory()
 
     # Create Directories
@@ -27,7 +21,15 @@ if __name__ == "__main__":
     playerRankings = FpScraper.getData()
 
     # Store the Data
-    for position in positions:
+    for position in ["qb", "rb", "wr", "te", "k", "flex"]:
         Directory.storeData(playerRankings[position],position)
+    
+    # Import Team/League Settings
+    with open('teams/PalmettoLeague.json') as jsonFile:
+        leagueSettings = json.load(jsonFile)
 
+    leagueSize = leagueSettings["leagueSize"]
+    positions = leagueSettings["positions"]
+    players = leagueSettings["players"]
+    
     # Compare Data with team 

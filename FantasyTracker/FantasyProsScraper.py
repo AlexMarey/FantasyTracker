@@ -3,9 +3,9 @@ from bs4 import BeautifulSoup
 
 class FantasyProsScraper(Scraper):
 
-    def __init__(self, positions, purpose):
-        self.positions = positions
-        self.purpose = purpose
+    def __init__(self):
+        self.positions = ["qb", "rb", "wr", "te", "k", "flex"]
+        self.purpose = 'rankings'
     
     def getData(self):
         playerRankings = {}
