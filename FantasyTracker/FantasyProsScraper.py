@@ -18,7 +18,7 @@ class FantasyProsScraper(Scraper):
             playerRankings[item] = self.processPayerData(playerData, item)
             # print("Position: {}".format(item))
             # print("Url: {}".format(url))
-            print("Data: {}".format(playerRankings[item]))
+            # print("Data: {} \n".format(playerRankings[item]))
         return playerRankings
     
     def makeUrl(self, purpose, position, scoring='half-point-ppr'):
@@ -44,7 +44,6 @@ class FantasyProsScraper(Scraper):
                 results.append([element for element in cell if element])        
             return results
             
-
     def processPayerData(self, data, position):
         nameLocation = 1
         rankLocation = 0

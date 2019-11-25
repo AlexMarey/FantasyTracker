@@ -1,5 +1,4 @@
 import os
-import csv
 from FantasyProsScraper import FantasyProsScraper
 from Directory import Directory
 
@@ -18,6 +17,8 @@ if __name__ == "__main__":
     positions = [qb, rb, wr, te, flex, k]
     league_size = 8
     week = 12
+    
+    # Import Team/League Settings
 
     # Class Initialization
     FpScraper = FantasyProsScraper(league_size, positions, rankings)
@@ -30,6 +31,13 @@ if __name__ == "__main__":
     # Get all Player rankings 
     playerRankings = FpScraper.getData()
 
+    # Store the Data
+    for position in positions:
+        # playerRankings[position]["position"] = positions
+        Directory.storeData(playerRankings[position],position)
+
+    # Compare Data with team 
+    #
     # Write to a CSV file
     # for position in playerRankings:
     #     print("Outputting {} rankings to csv".format(position))
