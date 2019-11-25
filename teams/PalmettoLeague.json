@@ -1,8 +1,7 @@
 {
-    "league": "The Palmetto League",
+    "leagueName": "The Palmetto League",
     "leagueSize": 8,
     "currentWeek": 15,
-    "teamSize": 16,
     "positions": 
         [
             "qb", "rb", "wr", "te", "k", "flex"
