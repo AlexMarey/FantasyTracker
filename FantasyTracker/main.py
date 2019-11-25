@@ -16,7 +16,7 @@ if __name__ == "__main__":
     positions = leagueSettings["positions"]
     
     # Class Initialization
-    FpScraper = FantasyProsScraper(leagueSize, positions, rankings)
+    FpScraper = FantasyProsScraper(positions, rankings)
     Directory = Directory()
 
     # Create Directories
