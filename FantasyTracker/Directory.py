@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 class Directory():
@@ -15,6 +16,7 @@ class Directory():
                 raise ValueError("Week must be between 0 and 18")
         else:
             raise ValueError("setWeek only excepts integers.")
+        return
 
     def getFormattedWeek(self):
         return 'Week_{}'.format(self.week)
@@ -24,11 +26,21 @@ class Directory():
 
     def createRankingsDirectory(self):
         Path(self.path).mkdir(parents=True, exist_ok=True)
+        return
         
     def createWeeklyDirectory(self):
         Path(self.getFormattedPath()).mkdir(parents=True, exist_ok=True)
+        return
 
     # Creates weekly ranking directory if there needs to be one
     def createWeeklyRankingDirectories(self):
         self.createRankingsDirectory()
         self.createWeeklyDirectory()
+        return
+        
+    def storeData(self, data, position):
+        filename = '{}.json'.format(position) 
+        path = 'rankings/{}/{}'.format(self.getFormattedWeek(), filename)
+        with open(path, 'w') as outfile:
+            json.dump(data, outfile)
+        return
