@@ -31,5 +31,22 @@ if __name__ == "__main__":
     leagueSize = leagueSettings["leagueSize"]
     positions = leagueSettings["positions"]
     players = leagueSettings["players"]
-    
+    print("Players from Team: {}".format(players))
+
     # Compare Data with team 
+    for teamPlayer in players:
+        position = teamPlayer["position"]
+        if (position != 'def'):
+            for playerRank in playerRankings[position]:
+                if (teamPlayer["name"] == playerRank["name"]):
+                    teamPlayer["rank"] = playerRank["rank"]
+                    # print("Player Found! {} is {}. Rank: {}".format(teamPlayer["name"],playerRank["name"],playerRank["rank"]))
+
+    # organized by postion, ordered by rank
+    # team = sorted(players, key=players.__getitem__)
+    
+    for teamPlayer in players:
+        try:
+            print("{}: {} [{}]".format(teamPlayer["position"],teamPlayer["name"],teamPlayer["rank"]))
+        except KeyError as key:
+            print("{}: {} [{}]".format(teamPlayer["position"],teamPlayer["name"], "Not Found"))    
