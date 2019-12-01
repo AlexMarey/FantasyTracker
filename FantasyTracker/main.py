@@ -26,28 +26,19 @@ if __name__ == "__main__":
     #     Directory.storeData(playerRankings[position],position)
     
     # Import Team/League Settings
-    with open('teams/PalmettoLeague.json') as jsonFile:
-        leagueSettings = json.load(jsonFile)
+    leagues = list()
+    teamDir = "teams"
+    for filename in os.listdir(teamDir):
+        path = "{}/{}".format(teamDir, filename)
+        with open(path) as jsonFile:
+            leagues.append(json.load(jsonFile))
 
-    leagueSize = leagueSettings["leagueSize"]
-    positions = leagueSettings["positions"]
-    players = leagueSettings["players"]
 
-    team = Team("Palmetto League")
+    for teamConfig in leagues:
 
-    # Compare Data with team 
-    for teamPlayer in players:
-        position = teamPlayer["position"]
-        playerFound = False
+        team = Team(teamConfig)
 
-        if (position != 'def'):
-            for playerRank in playerRankings[position]:
-                if (teamPlayer["name"] == playerRank["name"]):
-                    teamPlayer["rank"] = playerRank["rank"]
-                    playerFound = True
-        if (not playerFound): 
-            teamPlayer["rank"] = "No Rank Available"
+        # Compare Data with team 
+        team.getPlayerRankings(playerRankings)
 
-        team.addPlayer(teamPlayer)
- 
-    team.printTeam()
+        team.printTeam()

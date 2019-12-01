@@ -1,7 +1,7 @@
 {
     "leagueName": "The Palmetto League",
     "leagueSize": 8,
-    "currentWeek": 12,
+    "teamName": "The Flying Dutchman",
     "positions": 
         [
             "qb", "rb", "wr", "te", "k", "flex"
