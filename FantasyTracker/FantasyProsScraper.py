@@ -3,10 +3,9 @@ from bs4 import BeautifulSoup
 
 class FantasyProsScraper(Scraper):
 
-    def __init__(self, leagueSize, positions, purpose):
-        self.leagueSize = leagueSize
-        self.positions = positions
-        self.purpose = purpose
+    def __init__(self):
+        self.positions = ["qb", "rb", "wr", "te", "k", "flex"]
+        self.purpose = 'rankings'
     
     def getData(self):
         playerRankings = {}
@@ -49,22 +48,22 @@ class FantasyProsScraper(Scraper):
         rankLocation = 0
         
         processedData = list()
-        tier = 1
+        # tier = 1
         
         for item in data:
             if(len(item) > 1):
                 
                 rank = int(item[rankLocation])
                 playerName = self.parsePlayerName(item[nameLocation])
-                tierRank = '{}{}'.format(position.upper(), str(tier))
+                # tierRank = '{}{}'.format(position.upper(), str(tier))
                 
-                if (rank) % self.leagueSize == 0: 
-                    tier = tier + 1
+                # if (rank) % self.leagueSize == 0: 
+                #     tier = tier + 1
                 
                 processedData.append({
                     "name": playerName,
-                    "rank": rank,
-                    "tier": tierRank
+                    "rank": rank
+                    # "tier": tierRank
                 })
         return processedData
     

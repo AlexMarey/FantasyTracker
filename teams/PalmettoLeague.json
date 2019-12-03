@@ -1,7 +1,7 @@
 {
     "leagueName": "The Palmetto League",
     "leagueSize": 8,
-    "currentWeek": 15,
+    "teamName": "The Flying Dutchman",
     "positions": 
         [
             "qb", "rb", "wr", "te", "k", "flex"
@@ -10,67 +10,67 @@
         [
             {
                 "position": "qb",
-                "player": "Deshaun Watson"
+                "name": "Deshaun Watson"
             },
             {
                 "position": "qb",
-                "player": "Russell Wilson"
+                "name": "Russell Wilson"
             },
             {
                 "position": "wr",
-                "player": "DeAndre Hopkins"
+                "name": "DeAndre Hopkins"
             },
             {
                 "position": "wr",
-                "player": "Dj Chark Jr."
+                "name": "D.J. Chark"
             },
             {
                 "position": "wr",
-                "player": "Robert Woods"
+                "name": "Robert Woods"
             },
             {
                 "position": "rb",
-                "player": "David Montgomery"
+                "name": "David Montgomery"
             },
             {
                 "position": "rb",
-                "player": "Joe Mixon"
+                "name": "Joe Mixon"
             },
             {
                 "position": "k",
-                "player": "Matt Gay"
+                "name": "Matt Gay"
             },
             {
                 "position": "def",
-                "player": "Detroit"
+                "name": "Detroit"
             },
             {
                 "position": "te",
-                "player": "Ryan Griffin"
+                "name": "Ryan Griffin"
             },
             {
                 "position": "te",
-                "player": "Travis Kelce"
+                "name": "Travis Kelce"
             },
             {
                 "position": "wr",
-                "player": "Keenan Allen"
+                "name": "Keenan Allen"
             },
             {
                 "position": "rb",
-                "player": "Austin Ekeler"
+                "name": "Austin Ekeler"
             },
             {
                 "position": "rb",
-                "player": "Devin Singletary"
+                "name": "Devin Singletary"
             },
             {
                 "position": "wr",
-                "player": "Marquise Brown"
+                "name": "Marquise Brown"
             },
             {
                 "position": "rb",
-                "player": "Sony Michel"
+                "name": "Sony Michel"
             }
         ]
 }

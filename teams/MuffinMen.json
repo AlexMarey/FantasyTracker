@@ -1,0 +1,76 @@
+{
+    "leagueName": "Don't Touch Me I'm a Miner",
+    "leagueSize": 10,
+    "teamName": "The Muffin Men",
+    "positions": 
+        [
+            "qb", "rb", "wr", "te", "k", "flex"
+        ],
+    "players": 
+        [
+            {
+                "position": "qb",
+                "name": "Jared Goff"
+            },
+            {
+                "position": "rb",
+                "name": "Alvin Kamara"
+            },
+            {
+                "position": "rb",
+                "name": "Joe Mixon"
+            },
+            {
+                "position": "wr",
+                "name": "D.J. Chark"
+            },
+            {
+                "position": "wr",
+                "name": "Michael Gallup"
+            },
+            {
+                "position": "te",
+                "name": "Travis Kelce"
+            },
+            {
+                "position": "rb",
+                "name": "Kenyan Drake"
+            },
+            {
+                "position": "wr",
+                "name": "Sammy Watkins"
+            },
+            {
+                "position": "k",
+                "name": "Brett Maher"
+            },
+            {
+                "position": "def",
+                "name": "Denver"
+            },
+            {
+                "position": "qb",
+                "name": "Aaron Rodgers"
+            },
+            {
+                "position": "rb",
+                "name": "Latavius Murray"
+            },
+            {
+                "position": "rb",
+                "name": "Rashaad Penny"
+            },
+            {
+                "position": "rb",
+                "name": "Royce Freeman"
+            },
+            {
+                "position": "wr",
+                "name": "Mike Williams"
+            },
+            {
+                "position": "wr",
+                "name": "Curtis Samuel"
+            }
+        ]
+}
