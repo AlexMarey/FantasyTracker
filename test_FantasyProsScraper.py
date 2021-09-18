@@ -2,14 +2,15 @@ import pytest
 
 from FantasyProsScraper import FantasyProsScraper
 
-
 class TestFantasyProsScraper:
-    def test_init_ShouldReturnFantasyProsScraperWithListOfPositions(self):
-        fpsScraper = FantasyProsScraper()
+    @pytest.fixture
+    def fpsScraper(self):
+        return FantasyProsScraper()
+    
+    def test_init_ShouldReturnFantasyProsScraperWithListOfPositions(self, fpsScraper):
         assert fpsScraper.positions == ["qb", "rb", "wr", "te", "k", "flex"]
 
-    def test_makeUrl_ShouldRetrunUrlString(self):
-        fpsScraper = FantasyProsScraper()
+    def test_makeUrl_ShouldRetrunUrlString(self, fpsScraper):
         purpose = 'purp'
         position = 'rb'
         expectedResult = 'https://www.fantasypros.com/nfl/{0}/{1}.php'.format(
@@ -17,8 +18,7 @@ class TestFantasyProsScraper:
         result = fpsScraper.makeUrl(purpose, position)
         assert result == expectedResult
 
-    def test_makeUrl_ShouldReturnUrlWithScoring_WhenScoringIsNonStandard(self):
-        fpsScraper = FantasyProsScraper()
+    def test_makeUrl_ShouldReturnUrlWithScoring_WhenScoringIsNonStandard(self, fpsScraper):
         purpose = 'purp'
         position = 'rb'
         scoring = 'half-score'
@@ -27,8 +27,7 @@ class TestFantasyProsScraper:
         result = fpsScraper.makeUrl(purpose, position, scoring)
         assert result == expectedResult
 
-    def test_makeUrl_ShouldReturnStandardUrl_WhenScoringIsNonStandardAndPosIsQB(self):
-        fpsScraper = FantasyProsScraper()
+    def test_makeUrl_ShouldReturnStandardUrl_WhenScoringIsNonStandardAndPosIsQB(self, fpsScraper):
         purpose = 'purp'
         position = 'qb'
         scoring = 'half-score'
