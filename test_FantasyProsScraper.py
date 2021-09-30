@@ -1,12 +1,13 @@
 import pytest
 
-from FantasyProsScraper import FantasyProsScraper
+from FantasyProsScraperNew import FantasyProsScraper
+
 
 class TestFantasyProsScraper:
     @pytest.fixture
     def fpsScraper(self):
         return FantasyProsScraper()
-    
+
     def test_init_ShouldReturnFantasyProsScraperWithListOfPositions(self, fpsScraper):
         assert fpsScraper.positions == ["qb", "rb", "wr", "te", "k", "flex"]
 
