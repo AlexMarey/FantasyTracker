@@ -35,3 +35,6 @@ class TestFantasyProsScraper:
             purpose, position)
         result = fpsScraper.makeUrl(purpose, position, scoring)
         assert result == expectedResult
+
+    def test_parsePlayerName_ShouldReturnFormattedName(self, fpsScraper):
+        return

@@ -35,6 +35,7 @@ class FantasyProsScraper(Scraper):
             results = list()
             html = BeautifulSoup(response, 'html.parser')
             table = html.tbody
+            print(table)
             table_rows = table.select('tr')
 
             for row in table_rows:
@@ -52,7 +53,7 @@ class FantasyProsScraper(Scraper):
         
         for item in data:
             if(len(item) > 1):
-                
+                print(item)
                 rank = int(item[rankLocation])
                 playerName = self.parsePlayerName(item[nameLocation])
                 # tierRank = '{}{}'.format(position.upper(), str(tier))
@@ -74,4 +75,5 @@ class FantasyProsScraper(Scraper):
             player_name = '. '.join(split_name[:-1])[:-1]
         else: 
             player_name = split_name[0][:-1]
+        print(f"{name_list} -> {player_name}")
         return player_name
