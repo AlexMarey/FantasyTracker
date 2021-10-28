@@ -10,6 +10,8 @@ class Parser():
         current_year = current_year.year
 
         week = self._get_current_week()
+        if week is None:
+            return Exception('Unable to determine the current Week')
 
         return f"FantasyPros_{str(current_year)}_Week_{str(week)}_{position}_Rankings.csv"
 
